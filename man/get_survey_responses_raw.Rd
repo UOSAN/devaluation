@@ -7,9 +7,10 @@
 get_survey_responses_raw(session, path_to_creds)
 }
 \arguments{
-\item{session}{session number (0-5)}
+\item{session}{Session number (0-5)}
 
-\item{path_to_creds}{(file path to credentials file containing API token and base URL)}
+\item{path_to_creds}{(Full path to credentials file containing API token and base URL.
+The credentials file must have the following columns: data_source, base_url, api_token.}
 }
 \value{
 A tibble containing raw qualtrics responses for the specified session

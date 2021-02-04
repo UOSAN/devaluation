@@ -1,30 +1,38 @@
 #' Get raw responses for a set of Qualtrics surveys for a given session.
 #'
-#' @param session session number (0-5)
-#' @param path_to_creds (file path to credentials file containing API token and base URL)
+#' @param session Session number (0-5)
+#' @param path_to_creds (Full path to credentials file containing API token and base URL.
+#' The credentials file must have the following columns: data_source, base_url, api_token.
+#'
 #'
 #' @return A tibble containing raw qualtrics responses for the specified session
 #' @export
-#' @importFrom magrittr %>%
 #'
-#' @examples
 get_survey_responses_raw <- function(session, path_to_creds){
 
   if (!session %in% 0:5) {
     stop("You specified an invalid session number. Devaluation sessions range from 0 to 5.")
   }
 
+  if (!file.exists(path_to_creds)) {
+    stop("A credentials file does not exist at that path.")
+  }
+
   # read in credentials
   credentials <- readr::read_csv(path_to_creds)
 
+  if (!identical(sort(c("data_source", "base_url", "api_token")), sort(names(credentials)))) {
+    stop("Your credentials file must have the following columns: data_source, base_url, api_token")
+  }
+
   # extract API token
   qualtrics_token <- credentials %>%
-    dplyr::filter(data_source == "qualtrics") %>%
-    dplyr::pull(api_token)
+    dplyr::filter(.data$data_source == "qualtrics") %>%
+    dplyr::pull(.data$api_token)
 
   # extract baseURL
   base_url <- credentials %>%
-    dplyr::filter(data_source == "qualtrics") %>%
+    dplyr::filter(.data$data_source == "qualtrics") %>%
     dplyr::pull(base_url)
 
   # register credentials
@@ -35,10 +43,10 @@ get_survey_responses_raw <- function(session, path_to_creds){
 
   # extract id of selected session's surveys
   session_id <- qualtRics::all_surveys() %>%
-    dplyr::filter(stringr::str_detect(name, "DEV Session \\d Surveys")) %>%
-    dplyr::mutate(session_number = as.numeric(stringr::str_extract(name, "\\d"))) %>%
-    dplyr::filter(session == session_number) %>%
-    dplyr::pull(id)
+    dplyr::filter(stringr::str_detect(.data$name, "DEV Session \\d Surveys")) %>%
+    dplyr::mutate(session_number = as.numeric(stringr::str_extract(.data$name, "\\d"))) %>%
+    dplyr::filter(session == .data$session_number) %>%
+    dplyr::pull(.data$id)
 
   # extract selected session's surveys
   session_surveys <- qualtRics::fetch_survey(session_id)
