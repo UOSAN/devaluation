@@ -4,6 +4,9 @@
 # devaluation
 
 <!-- badges: start -->
+
+[![R build
+status](https://github.com/UOSAN/devaluation/workflows/R-CMD-check/badge.svg)](https://github.com/UOSAN/devaluation/actions)
 <!-- badges: end -->
 
 ## Installation
