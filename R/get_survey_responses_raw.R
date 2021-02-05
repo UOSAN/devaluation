@@ -19,7 +19,7 @@ get_survey_responses_raw <- function(session, path_to_creds){
   }
 
   # read in credentials
-  credentials <- readr::read_csv(path_to_creds)
+  credentials <- read_csv(path_to_creds)
 
   if (!identical(sort(c("data_source", "base_url", "api_token")), sort(names(credentials)))) {
     stop("Your credentials file must have the following columns: data_source, base_url, api_token")
@@ -27,13 +27,13 @@ get_survey_responses_raw <- function(session, path_to_creds){
 
   # extract API token
   qualtrics_token <- credentials %>%
-    dplyr::filter(.data$data_source == "qualtrics") %>%
-    dplyr::pull(.data$api_token)
+    filter(.data$data_source == "qualtrics") %>%
+    pull(.data$api_token)
 
   # extract baseURL
   base_url <- credentials %>%
-    dplyr::filter(.data$data_source == "qualtrics") %>%
-    dplyr::pull(base_url)
+    filter(.data$data_source == "qualtrics") %>%
+    pull(base_url)
 
   # register credentials
   qualtRics::qualtrics_api_credentials(
@@ -43,14 +43,14 @@ get_survey_responses_raw <- function(session, path_to_creds){
 
   # extract id of selected session's surveys
   session_id <- qualtRics::all_surveys() %>%
-    dplyr::filter(stringr::str_detect(.data$name, "DEV Session \\d Surveys")) %>%
-    dplyr::mutate(session_number = as.numeric(stringr::str_extract(.data$name, "\\d"))) %>%
-    dplyr::filter(session == .data$session_number) %>%
-    dplyr::pull(.data$id)
+    filter(str_detect(.data$name, "DEV Session \\d Surveys")) %>%
+    mutate(session_number = as.numeric(str_extract(.data$name, "\\d"))) %>%
+    filter(session == .data$session_number) %>%
+    pull(.data$id)
 
   # extract selected session's surveys
   session_surveys <- qualtRics::fetch_survey(session_id)
 
   # return a tibble
-  tibble::as_tibble(session_surveys)
+  as_tibble(session_surveys)
 }
