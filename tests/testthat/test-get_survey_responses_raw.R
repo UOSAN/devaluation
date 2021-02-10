@@ -11,15 +11,9 @@ test_that("Returns proper errors.", {
 # })
 
 
-test_that('demonstrate stubbing', {
-  # Use mockery::stub so each time 'file.exists' is called in get_survey_responses_raw,
-  # 'file.exists' returns TRUE.
+test_that('Credential file errors', {
   mockery::stub(get_survey_responses_raw, 'file.exists', TRUE)
-
-  # Use mockery::stub to replace 'read_csv' when called from 'get_survey_responses_raw',
-  # and make 'read_csv' return a tibble that does not contain the required fields.
   mockery::stub(get_survey_responses_raw, 'read_csv', tibble::tibble(invalid_key = "key"))
-
   expect_error(get_survey_responses_raw(session = 0, path_to_creds = ""),
                "Your credentials file must have the following columns: data_source, base_url, api_token")
 })

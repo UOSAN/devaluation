@@ -21,4 +21,5 @@ Imports:
     qualtRics,
     rlang
 Suggests: 
-    testthat
+    testthat,
+    mockery
