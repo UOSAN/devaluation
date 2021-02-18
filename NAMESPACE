@@ -2,8 +2,8 @@
 
 export(get_rubrics)
 export(get_survey_data)
+export(get_survey_info)
 export(get_survey_responses)
-export(get_survey_responses_raw)
 export(get_surveys)
 export(register_qualtrics_credentials)
 import(dplyr)
