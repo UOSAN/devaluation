@@ -19,7 +19,9 @@ Imports:
     magrittr,
     tibble,
     qualtRics,
-    rlang
+    rlang,
+    psych,
+    tidyr
 Suggests: 
     testthat,
     mockery
