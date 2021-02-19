@@ -23,8 +23,8 @@ get_survey_info <- function(){
   surveys_df <- qualtRics::all_surveys() %>%
     filter(str_detect(.data$name, "DEV Session \\d Surveys")) %>%
     mutate(session_number = as.numeric(str_extract(.data$name, "\\d"))) %>%
-    arrange(session_number) %>%
-    select(-session_number)
+    arrange(.data$session_number) %>%
+    select(-.data$session_number)
 
   # return a tibble
   as_tibble(surveys_df)
