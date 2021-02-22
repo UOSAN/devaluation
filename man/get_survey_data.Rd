@@ -4,15 +4,24 @@
 \alias{get_survey_data}
 \title{Get survey data}
 \usage{
-get_survey_data(surveys_df, pid_col = "Login")
+get_survey_data(surveys_df, pid_col = "(Login|ResponseId|Finished)")
 }
 \arguments{
-\item{surveys_df}{A tibble as returned by the \code{\link{get_survey_info}}.}
+\item{surveys_df}{A tibble as returned by \code{\link{get_survey_info}}.}
 
-\item{pid_col}{A character with the column name specifying user ID.}
+\item{pid_col}{A character with the column name specifying user ID or a regular expression
+identifying the column(s) that you'd like to keep in wide format. Defaults to a regular expression
+that selects columns that are useful for determining valid (e.g. non-duplicate) responses:
+\itemize{
+\item "Login" (participant ID)
+\item "ResponseId" (alphanumeric sequence that uniquely identifies a set of survey
+responses for an individual)
+\item "Finished" (indicates whether the survey was completed or not)
+}}
 }
 \value{
-Returns a long format tibble of survey data with names "SID variable name", "item", "value", "survey_name"
+Returns a long format tibble of survey data with columns identified by \code{pid_col}
+along with columns labeled "item", "value", and "survey_name"
 }
 \description{
 Get survey data
