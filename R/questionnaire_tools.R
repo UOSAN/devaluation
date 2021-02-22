@@ -3,7 +3,9 @@
 #' Wrangle scoring rubrics into a long-format tibble.
 #'
 #' @param path_to_rubrics Character string specifying full path to directory where
-#' scoring rubrics are saved.
+#' scoring rubrics are saved. Rubrics should be saved as .csv files and named according
+#' to the following convention: \code{<measure>_scoring_rubric.csv}, e.g. \code{PLAN_scoring_rubric.csv}
+#' for the Planfulness Scale
 #'
 #' @return Returns a long-format tibble of scoring rubrics with the following column names:
 #' "file"           "data_file_name" "scale_name"     "column_name"

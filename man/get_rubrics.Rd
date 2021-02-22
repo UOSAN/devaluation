@@ -8,7 +8,9 @@ get_rubrics(path_to_rubrics)
 }
 \arguments{
 \item{path_to_rubrics}{Character string specifying full path to directory where
-scoring rubrics are saved.}
+scoring rubrics are saved. Rubrics should be saved as .csv files and named according
+to the following convention: \code{<measure>_scoring_rubric.csv}, e.g. \code{PLAN_scoring_rubric.csv}
+for the Planfulness Scale}
 }
 \value{
 Returns a long-format tibble of scoring rubrics with the following column names:
