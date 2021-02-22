@@ -21,7 +21,8 @@ Imports:
     qualtRics,
     rlang,
     psych,
-    tidyr
+    tidyr,
+    janitor
 Suggests: 
     testthat,
     mockery
