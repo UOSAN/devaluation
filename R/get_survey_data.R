@@ -46,7 +46,6 @@ get_survey_data <- function(surveys_df, pid_col = '(Login|ResponseId|Finished)')
 #' @param label default is \code{FALSE}.
 #' @param convert default is \code{FALSE}.
 #' @param force_request default is \code{TRUE}.
-#' @export
 get_survey_responses<-function(survey_id, label = FALSE, convert = FALSE, force_request = TRUE) {
   responses_df <- qualtRics::fetch_survey(survey_id,
                                          label = label,
