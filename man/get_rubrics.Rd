@@ -2,7 +2,7 @@
 % Please edit documentation in R/questionnaire_tools.R
 \name{get_rubrics}
 \alias{get_rubrics}
-\title{Get rubrics}
+\title{Get scoring rubrics}
 \usage{
 get_rubrics(path_to_rubrics)
 }
@@ -11,11 +11,11 @@ get_rubrics(path_to_rubrics)
 scoring rubrics are saved.}
 }
 \value{
-Returns a long data frame of rubrics with names:
+Returns a long-format tibble of scoring rubrics with the following column names:
 "file"           "data_file_name" "scale_name"     "column_name"
 "reverse"        "transform"      "scored_scale"   "include"
 "min"            "max".
 }
 \description{
-Get rubrics
+Wrangle scoring rubrics into a long-format tibble.
 }

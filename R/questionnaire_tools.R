@@ -5,7 +5,7 @@
 #' @param path_to_rubrics Character string specifying full path to directory where
 #' scoring rubrics are saved.
 #'
-#' @return Returns a long-format tibble of rubrics with the following column names:
+#' @return Returns a long-format tibble of scoring rubrics with the following column names:
 #' "file"           "data_file_name" "scale_name"     "column_name"
 #' "reverse"        "transform"      "scored_scale"   "include"
 #' "min"            "max".
@@ -63,4 +63,51 @@ score_questionnaire_psych <- function(dataDF, rubricsDF, scale_name = NULL, retu
   }
   rownames(scored_scales$scores) <- dataDF_w$SID
   return(scored_scales)
+}
+
+#' Create \code{psych} key from rubric
+#'
+#' @param rubricsDF A long-format tibble of scoring rubrics as returned by \code{\link{get_rubrics}}.
+#' @param scale_name Name of the scale you wish to create a scoring key for, as a character string.
+#' By default, all scales represented in \code{rubricsDF} are selected (i.e. \code{scale_name} is set to \code{NULL}).
+#'
+#' @return A named list containing scoring keys to be used by the \code{psych} package.
+create_key_from_rubric <- function(rubricsDF, scale_name = NULL){
+  if(!is.null(scale_name)){
+    rubricsDF <-
+      rubricsDF %>%
+      filter(.data$scale_name == scale_name)
+  }
+
+  if('include' %in% names(rubricsDF)){
+    rubricsDF <-
+      rubricsDF %>%
+      ungroup() %>%
+      filter(.data$include == 1)
+  }
+  if('reverse' %in% names(rubricsDF)){
+    rubricsDF <-
+      rubricsDF %>%
+      ungroup() %>%
+      mutate(reverse = ifelse(is.na(.data$reverse), 0, .data$reverse),
+             rscore_col_name = paste0(ifelse(.data$reverse == 1, '-', ''), .data$column_name))
+  } else {
+    warning('No reverse-keyed items.')
+    rubricsDF <-
+      rubricsDF %>%
+      ungroup() %>%
+      mutate(rscore_col_name = .data$column_name)
+  }
+
+  keys_list_l <-
+    rubricsDF %>%
+    select(.data$rscore_col_name, .data$scored_scale)
+
+  scored_scale_names <- unique(keys_list_l$scored_scale)
+
+  key_list <- lapply(scored_scale_names, function(x){
+    keys_list_l$rscore_col_name[keys_list_l$scored_scale == x]
+  })
+  names(key_list) <- scored_scale_names
+  return(key_list)
 }
