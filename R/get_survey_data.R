@@ -16,9 +16,9 @@ get_survey_data <- function(surveys_df, pid_col = '(Login|ResponseId|Finished)')
 
   # get nested data frame with survey responses in list column
   survey_data <- surveys_df %>%
-    select(survey_id = id, survey_name = name) %>%
+    select(survey_id = .data$id, survey_name = .data$name) %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(survey_data = list(get_survey_responses(survey_id = survey_id)))
+    dplyr::mutate(survey_data = list(get_survey_responses(survey_id = .data$survey_id)))
 
   # wrangle into long format
   # BC: Struggling to refactor this...
