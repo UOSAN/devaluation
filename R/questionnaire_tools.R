@@ -42,18 +42,17 @@ get_rubrics <- function(path_to_rubrics){
 }
 
 
-#' score questionnaire psych
+#' Score questionnaire using the psych package
 #'
-#' @param dataDF dataDF
-#' @param rubricsDF rubricsDF
+#' @param dataDF A long-format tibble as returned by \code{\link{get_survey_data}}
+#' @param rubricsDF A long-format tibble as returned by \code{\link{get_rubrics}}
+#' @param SID A regular expression specifying subject ID variable
 #' @param scale_name scale_name
 #' @param return_with_data return_with_data
 #'
-#' @import psych
-#' @import dplyr
-#' @import tidyr
-score_questionnaire_psych <- function(dataDF, rubricsDF, scale_name = NULL, return_with_data = FALSE){
-  requireNamespace(psych, quietly = TRUE)
+#' @return A long-format tibble with scale scores.
+#' @export
+score_questionnaire_psych <- function(dataDF, rubricsDF, SID, scale_name = NULL, return_with_data = FALSE){
 
   key_list <- create_key_from_rubric(rubricsDF = rubricsDF, scale_name = scale_name)
 
@@ -64,10 +63,10 @@ score_questionnaire_psych <- function(dataDF, rubricsDF, scale_name = NULL, retu
     scored_scales$input_data <- dataDF_w
   }
   rownames(scored_scales$scores) <- dataDF_w$SID
-  return(scored_scales)
+  return(scored_scales$scores)
 }
 
-#' Create \code{psych} key from rubric
+#' Create \code{psych} scoring key from tibble of scoring rubrics.
 #'
 #' @param rubricsDF A long-format tibble of scoring rubrics as returned by \code{\link{get_rubrics}}.
 #' @param scale_name Name of the scale you wish to create a scoring key for, as a character string.

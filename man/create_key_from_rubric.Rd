@@ -2,7 +2,7 @@
 % Please edit documentation in R/questionnaire_tools.R
 \name{create_key_from_rubric}
 \alias{create_key_from_rubric}
-\title{Create \code{psych} key from rubric}
+\title{Create \code{psych} scoring key from tibble of scoring rubrics.}
 \usage{
 create_key_from_rubric(rubricsDF, scale_name = NULL)
 }
@@ -16,5 +16,5 @@ By default, all scales represented in \code{rubricsDF} are selected (i.e. \code{
 A named list containing scoring keys to be used by the \code{psych} package.
 }
 \description{
-Create \code{psych} key from rubric
+Create \code{psych} scoring key from tibble of scoring rubrics.
 }

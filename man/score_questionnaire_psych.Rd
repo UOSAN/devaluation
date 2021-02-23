@@ -2,24 +2,30 @@
 % Please edit documentation in R/questionnaire_tools.R
 \name{score_questionnaire_psych}
 \alias{score_questionnaire_psych}
-\title{score questionnaire psych}
+\title{Score questionnaire using the psych package}
 \usage{
 score_questionnaire_psych(
   dataDF,
   rubricsDF,
+  SID,
   scale_name = NULL,
   return_with_data = FALSE
 )
 }
 \arguments{
-\item{dataDF}{dataDF}
+\item{dataDF}{A long-format tibble as returned by \code{\link{get_survey_data}}}
 
-\item{rubricsDF}{rubricsDF}
+\item{rubricsDF}{A long-format tibble as returned by \code{\link{get_rubrics}}}
+
+\item{SID}{A regular expression specifying subject ID variable}
 
 \item{scale_name}{scale_name}
 
 \item{return_with_data}{return_with_data}
 }
+\value{
+A long-format tibble with scale scores.
+}
 \description{
-score questionnaire psych
+Score questionnaire using the psych package
 }

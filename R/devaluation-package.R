@@ -8,6 +8,7 @@
 #' @importFrom readr read_csv
 #' @importFrom qualtRics qualtrics_api_credentials fetch_survey all_surveys
 #' @importFrom janitor clean_names
+#' @importFrom psych scoreItems
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
