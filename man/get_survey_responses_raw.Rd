@@ -2,19 +2,16 @@
 % Please edit documentation in R/get_survey_responses_raw.R
 \name{get_survey_responses_raw}
 \alias{get_survey_responses_raw}
-\title{Get raw responses for a set of Qualtrics surveys for a given session.}
+\title{Raw survey responses}
 \usage{
-get_survey_responses_raw(session, path_to_creds)
+get_survey_responses_raw(session)
 }
 \arguments{
-\item{session}{Session number (0-5)}
-
-\item{path_to_creds}{(Full path to credentials file containing API token and base URL.
-The credentials file must have the following columns: data_source, base_url, api_token.}
+\item{session}{DEV session number (0-5)}
 }
 \value{
-A tibble containing raw qualtrics responses for the specified session
+A tibble containing raw survey responses for the specified session.
 }
 \description{
-Get raw responses for a set of Qualtrics surveys for a given session.
+Get raw responses from Qualtrics surveys for a given DEV session
 }

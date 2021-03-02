@@ -2,9 +2,11 @@
 
 export(get_survey_responses_raw)
 export(register_qualtrics_credentials)
+importFrom(dplyr,arrange)
 importFrom(dplyr,filter)
 importFrom(dplyr,mutate)
 importFrom(dplyr,pull)
+importFrom(dplyr,select)
 importFrom(magrittr,"%>%")
 importFrom(qualtRics,fetch_survey)
 importFrom(qualtRics,qualtrics_api_credentials)
