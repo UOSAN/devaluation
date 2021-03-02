@@ -1,6 +1,6 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter pull mutate select arrange
+#' @importFrom dplyr filter pull mutate select arrange rowwise ungroup
 #' @importFrom tibble as_tibble
 #' @importFrom stringr str_detect str_extract
 #' @importFrom rlang .data
