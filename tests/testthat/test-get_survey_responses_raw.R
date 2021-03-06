@@ -1,10 +1,12 @@
 test_that("Returns proper errors.", {
   expect_error(get_survey_responses_raw(session = 6), "You specified an invalid session number. Devaluation sessions range from 0 to 5.")
-  expect_error(get_survey_responses_raw(session = 0, path_to_creds = ""), "A credentials file does not exist at that path.")
+})
 
-  # stub out the function to avoid including real API credentials
-  mockery::stub(get_survey_responses_raw, 'file.exists', TRUE)
-  mockery::stub(get_survey_responses_raw, 'read_csv', tibble::tibble(invalid_key = "key"))
-  expect_error(get_survey_responses_raw(session = 0, path_to_creds = ""),
-               "Your credentials file must have the following columns: data_source, base_url, api_token")
+test_that("Returns error if no credentials registered.", {
+  mockery::stub(get_survey_responses_raw, 'Sys.getenv', "")
+  expect_error(
+    get_survey_responses_raw(session = 0),
+    "You need to register your Qualtrics credentials using the register_qualtrics_credentials() function.",
+    fixed = TRUE
+  )
 })
