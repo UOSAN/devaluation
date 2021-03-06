@@ -13,3 +13,11 @@ test_that("Returns proper errors.", {
     "Your credentials file must have the following columns: data_source, base_url, api_token"
   )
 })
+
+test_that("Returns success message", {
+  expect_message(
+    register_qualtrics_credentials(path_to_creds = "fake_credentials.csv"),
+    "To install your credentials for use in future sessions, run this function with `install = TRUE`.",
+    fixed = TRUE
+  )
+})

@@ -33,14 +33,8 @@ register_qualtrics_credentials <- function(path_to_creds){
     pull(base_url)
 
   # register credentials -- returns TRUE if successful
-  loaded <- qualtRics::qualtrics_api_credentials(
+  qualtRics::qualtrics_api_credentials(
     api_key = qualtrics_token,
     base_url = base_url,
     install = FALSE)
-
-  if(!all(loaded)){
-    stop('Could not register qualtrics API credentials. Double check your API token and base URL.')
-  } else {
-    message('Qualtrics API credentials successfully loaded...')
-  }
 }
