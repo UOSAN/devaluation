@@ -16,6 +16,10 @@
 #'
 get_redcap_raw <- function(path_to_creds, identifiable = FALSE){
 
+  if (!file.exists(path_to_creds)) {
+    stop("A credentials file does not exist at that path.")
+  }
+
   # read in credentials
   credentials <- read_csv(path_to_creds)
 
