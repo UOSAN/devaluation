@@ -19,7 +19,8 @@ Imports:
     magrittr,
     tibble,
     qualtRics,
-    rlang
+    rlang,
+    REDCapR
 Suggests: 
     testthat,
     mockery

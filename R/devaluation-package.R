@@ -1,11 +1,12 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
-#' @importFrom dplyr filter pull mutate select arrange rowwise ungroup
+#' @importFrom dplyr filter pull mutate select arrange rowwise ungroup all_of starts_with
 #' @importFrom tibble as_tibble
 #' @importFrom stringr str_detect str_extract
 #' @importFrom rlang .data
 #' @importFrom readr read_csv
 #' @importFrom qualtRics qualtrics_api_credentials fetch_survey
+#' @importFrom REDCapR redcap_read_oneshot
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
