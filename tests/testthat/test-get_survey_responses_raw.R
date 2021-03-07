@@ -1,4 +1,4 @@
-test_that("Returns proper errors.", {
+test_that("Returns error for invalid session ID.", {
   expect_error(get_survey_responses_raw(session = 6), "You specified an invalid session number. Devaluation sessions range from 0 to 5.")
 })
 
@@ -10,3 +10,4 @@ test_that("Returns error if no credentials registered.", {
     fixed = TRUE
   )
 })
+
