@@ -22,7 +22,7 @@ get_survey_info <- function(append_raw_data = FALSE){
   }
 
   # get survey metadata
-  surveys_df <- qualtRics::all_surveys() %>%
+  surveys_df <- all_surveys() %>%
     filter(str_detect(.data$name, "DEV Session \\d Surveys")) %>%
     mutate(session_number = as.numeric(str_extract(.data$name, "\\d"))) %>%
     arrange(.data$session_number)

@@ -18,17 +18,17 @@ get_survey_responses_raw <- function(session){
   }
 
   # extract id of selected session's surveys
-  survey_id <- qualtRics::all_surveys() %>%
+  survey_id <- all_surveys() %>%
     filter(str_detect(.data$name, "DEV Session \\d Surveys")) %>%
     mutate(session_number = as.numeric(str_extract(.data$name, "\\d"))) %>%
     filter(session == .data$session_number) %>%
     pull(.data$id)
 
   # extract selected session's surveys
-  session_surveys <- qualtRics::fetch_survey(survey_id,
-                                             label = FALSE, # numerical values instead of Choice Text
-                                             convert = FALSE, # don't automatically convert multiple choice q's, etc.
-                                             force_request = TRUE) # don't create tmp directory, always retrieve from API
+  session_surveys <- fetch_survey(survey_id,
+                                  label = FALSE, # numerical values instead of Choice Text
+                                  convert = FALSE, # don't automatically convert multiple choice q's, etc.
+                                  force_request = TRUE) # don't create tmp directory, always retrieve from API
 
   # return a tibble
   as_tibble(session_surveys)

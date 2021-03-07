@@ -5,7 +5,7 @@
 #' @importFrom stringr str_detect str_extract
 #' @importFrom rlang .data
 #' @importFrom readr read_csv
-#' @importFrom qualtRics qualtrics_api_credentials fetch_survey
+#' @importFrom qualtRics qualtrics_api_credentials fetch_survey all_surveys
 #' @importFrom REDCapR redcap_read_oneshot
 "_PACKAGE"
 
