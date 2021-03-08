@@ -8,6 +8,13 @@
 \description{
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/UOSAN/devaluation}
+}
+
+}
 \author{
 \strong{Maintainer}: Brendan Cullen \email{bcullen@uoregon.edu}
 

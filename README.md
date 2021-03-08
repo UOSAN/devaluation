@@ -29,4 +29,6 @@ You can install the development version from
 devtools::install_github("UOSAN/devaluation")
 ```
 
-See the Get Started page for information on basic usage.
+See the [Get
+Started](https://uosan.github.io/devaluation/articles/get-started.html)
+page for information on basic usage.
