@@ -1,4 +1,4 @@
-#' Survey info
+#' Get Qualtrics survey info
 #'
 #' Get information about all DEV Qualtrics surveys, including number of
 #' observations in raw data and date of most recent response

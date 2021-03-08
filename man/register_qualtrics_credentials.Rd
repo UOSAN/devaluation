@@ -2,7 +2,7 @@
 % Please edit documentation in R/register_qualtrics_credentials.R
 \name{register_qualtrics_credentials}
 \alias{register_qualtrics_credentials}
-\title{Register Qualtrics API credentials in your current session.}
+\title{Register Qualtrics API credentials in your current session}
 \usage{
 register_qualtrics_credentials(path_to_creds)
 }

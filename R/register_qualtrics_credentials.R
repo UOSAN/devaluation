@@ -1,4 +1,4 @@
-#' Register Qualtrics API credentials in your current session.
+#' Register Qualtrics API credentials in your current session
 #'
 #' Reads the API token and base URL from a credentials file (in .csv format) and sets up the environment
 #' variables necessary for accessing data. Uses

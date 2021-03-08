@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_survey_info.R
 \name{get_survey_info}
 \alias{get_survey_info}
-\title{Survey info}
+\title{Get Qualtrics survey info}
 \usage{
 get_survey_info(append_raw_data = FALSE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_survey_responses_raw.R
 \name{get_survey_responses_raw}
 \alias{get_survey_responses_raw}
-\title{Raw survey responses}
+\title{Get raw Qualtrics survey responses}
 \usage{
 get_survey_responses_raw(session)
 }

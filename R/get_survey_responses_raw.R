@@ -1,4 +1,4 @@
-#' Raw survey responses
+#' Get raw Qualtrics survey responses
 #'
 #' Get raw responses from Qualtrics surveys for a given DEV session
 #'
