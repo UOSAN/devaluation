@@ -1,7 +1,10 @@
 #' Get raw Redcap data
 #'
+#' Uses \code{\link[REDCapR]{redcap_read_oneshot}} to interface with Redcap API and fetch raw data.
+#'
 #' @param path_to_creds Full path to credentials file containing API token and base URL.
 #' The credentials file must have the following columns: data_source, base_url, api_token.
+#'
 #' @param identifiable A logical value indicating whether identifiable variables should be
 #' included in the output. This identifiable information includes:
 #' * first name

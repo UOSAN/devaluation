@@ -25,5 +25,5 @@ included in the output. This identifiable information includes:
 A tibble containing raw Redcap data
 }
 \description{
-Get raw Redcap data
+Uses \code{\link[REDCapR]{redcap_read_oneshot}} to interface with Redcap API and fetch raw data.
 }
