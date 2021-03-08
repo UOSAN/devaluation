@@ -1,0 +1,80 @@
+---
+title: "Get Started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{get-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This package is designed to retrieve raw data from the Devaluation study from two sources -- questionnaires administered via [Qualtrics](https://www.qualtrics.com/) and a host of measures collected via [Redcap](https://www.project-redcap.org/), including outcome measures such as body mass, BMI, and hip-waist ratio. 
+
+These data are collected from participants across 6 sessions: 
+
+|Session   |Study timepoint |
+|:---------|:------------------ |
+|Session 0 | Initial visit      |
+|Session 1 | Pre-intervention   |
+|Session 2 | Post-intervention  | 
+|Session 3 | 3-month follow-up  |
+|Session 4 | 6-month follow-up  | 
+|Session 5 | 12-month follow-up | 
+
+**Note.** Data are currently not publicly available, as data collection is ongoing, so the examples included here demonstrate code usage only and do not include output.
+
+## API credentials file
+
+To access data, you will need a credentials file, saved in .csv format, that contains valid API tokens for Qualtrics and Redcap, along with the proper UO-specific base URL for each platform. (The example shown here does not contain valid tokens.)
+
+```{r message=FALSE}
+library(readr)
+read_csv("credentials.csv")
+```
+
+## Qualtrics
+
+To access survey data from Qualtrics, first register your Qualtrics credentials in your current R session by passing the path to where your credentials file is saved to `register_qualtrics_credentials()`.
+
+```{r eval=FALSE}
+library(devaluation)
+register_qualtrics_credentials(path_to_creds = "credentials.csv")
+```
+
+Once your credentials are registered, you can use `get_survey_info()` to obtain metadata about Qualtrics surveys, including the date each survey was last modified and the number of observations collected.
+
+```{r eval=FALSE}
+get_survey_info()
+```
+
+To include the raw data along with survey metadata, set `append_raw_data = TRUE`. This returns a nested tibble in which raw data are saved as a list column.
+
+```{r eval=FALSE}
+get_survey_info(append_raw_data = TRUE)
+```
+
+You can also retrieve raw survey data for a given session with `get_survey_responses_raw()`.
+
+```{r eval=FALSE}
+get_survey_responses_raw(session = 1)
+```
+
+## Redcap
+
+Get raw Redcap data with `get_redcap_raw()`. Rather than register your Redcap credentials in your session, simply feed this function the path to your credentials file with the `path_to_creds` argument.
+
+```{r eval=FALSE}
+get_redcap_raw(path_to_creds = "credentials.csv")
+```
+
+By default, identifiable information is excluded when retrieving raw Redcap data. To include identifiable variables, you must set `identifiable = TRUE`.
+
+```{r eval=FALSE}
+get_redcap_raw(path_to_creds = "credentials.csv", identifiable = TRUE)
+```

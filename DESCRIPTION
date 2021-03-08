@@ -24,4 +24,7 @@ Imports:
     REDCapR
 Suggests: 
     testthat,
-    mockery
+    mockery,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
