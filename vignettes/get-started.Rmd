@@ -8,6 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -18,14 +19,34 @@ This package is designed to retrieve raw data from the Devaluation study from tw
 
 These data are collected from participants across 6 sessions: 
 
-|Session   |Study timepoint |
-|:---------|:------------------ |
-|Session 0 | Initial visit      |
-|Session 1 | Pre-intervention   |
-|Session 2 | Post-intervention  | 
-|Session 3 | 3-month follow-up  |
-|Session 4 | 6-month follow-up  | 
-|Session 5 | 12-month follow-up | 
+```{css echo = FALSE}
+thead {
+  background-color: #2C3E50;
+  color: #fff;
+}
+```
+
+```{r echo = FALSE}
+session_data <- data.frame(
+  Session = paste("Session", 0:5),
+  `Study timepoint` = c(
+    "Initial visit",
+    "Pre-intervention",
+    "Post-intervention",
+    "3-month follow-up",
+    "6-month follow-up",
+    "12-month follow-up"
+    )
+)
+library(magrittr)
+knitr::kable(session_data, 
+             col.names = c("Session", "Study timepoint"),
+             escape = FALSE) %>% 
+  kableExtra::kable_styling(
+    c("striped", "hover"),
+    full_width = TRUE
+  )
+```
 
 **Note.** Data are currently not publicly available, as data collection is ongoing, so the examples included here demonstrate code usage only and do not include output.
 
@@ -33,7 +54,9 @@ These data are collected from participants across 6 sessions:
 
 To access data, you will need a credentials file, saved in .csv format, that contains valid API tokens for Qualtrics and Redcap, along with the proper UO-specific base URL for each platform. (The example shown here does not contain valid tokens.)
 
-```{r message=FALSE}
+The credentials file should take the following form:
+
+```{r message=FALSE, echo = FALSE}
 library(readr)
 read_csv("credentials.csv")
 ```
@@ -50,31 +73,38 @@ register_qualtrics_credentials(path_to_creds = "credentials.csv")
 Once your credentials are registered, you can use `get_survey_info()` to obtain metadata about Qualtrics surveys, including the date each survey was last modified and the number of observations collected.
 
 ```{r eval=FALSE}
-get_survey_info()
+survey_metadata <- get_survey_info()
+survey_metadata
 ```
+
+![](survey_metadata.png)
 
 To include the raw data along with survey metadata, set `append_raw_data = TRUE`. This returns a nested tibble in which raw data are saved as a list column.
 
 ```{r eval=FALSE}
-get_survey_info(append_raw_data = TRUE)
+survey_raw_data <- get_survey_info(append_raw_data = TRUE)
+survey_raw_data
 ```
 
 You can also retrieve raw survey data for a given session with `get_survey_responses_raw()`.
 
 ```{r eval=FALSE}
-get_survey_responses_raw(session = 1)
+session_3 <- get_survey_responses_raw(session = 3)
+session_3
 ```
 
 ## Redcap
 
-Get raw Redcap data with `get_redcap_raw()`. Rather than register your Redcap credentials in your session, simply feed this function the path to your credentials file with the `path_to_creds` argument.
+The package also facilitates the retrieval of data from Redcap with the `get_redcap_raw()` function. Rather than register your Redcap credentials in your session, simply feed this function the path to your credentials file with the `path_to_creds` argument.
 
 ```{r eval=FALSE}
-get_redcap_raw(path_to_creds = "credentials.csv")
+redcap_raw <- get_redcap_raw(path_to_creds = "credentials.csv")
+redcap_raw
 ```
 
 By default, identifiable information is excluded when retrieving raw Redcap data. To include identifiable variables, you must set `identifiable = TRUE`.
 
 ```{r eval=FALSE}
-get_redcap_raw(path_to_creds = "credentials.csv", identifiable = TRUE)
+redcap_identifiable <- get_redcap_raw(path_to_creds = "credentials.csv", identifiable = TRUE)
+redcap_identifiable
 ```
