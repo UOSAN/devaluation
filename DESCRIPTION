@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "bcullen@uoregon.edu")
 Description: What the package does (one paragraph).
-URL: https://github.com/UOSAN/devaluation
+URL: https://github.com/UOSAN/devaluation,
+     https://uosan.github.io/devaluation/
+BugReports: https://github.com/UOSAN/devaluation/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
