@@ -12,6 +12,8 @@ What the package does (one paragraph).
 Useful links:
 \itemize{
   \item \url{https://github.com/UOSAN/devaluation}
+  \item \url{https://uosan.github.io/devaluation/}
+  \item Report bugs at \url{https://github.com/UOSAN/devaluation/issues}
 }
 
 }

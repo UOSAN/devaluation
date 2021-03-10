@@ -28,5 +28,6 @@ Suggests:
     testthat,
     mockery,
     knitr,
-    rmarkdown
+    rmarkdown,
+    kableExtra
 VignetteBuilder: knitr
