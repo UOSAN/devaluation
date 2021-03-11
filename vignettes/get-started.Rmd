@@ -48,7 +48,7 @@ knitr::kable(session_data,
   )
 ```
 
-**Note.** Data are currently not publicly available, as data collection is ongoing, so the examples included here demonstrate code usage only and do not include output.
+**Note.** The examples included here demonstrate code usage with screenshots of redacted output to protect data privacy.
 
 ## API credentials file
 
@@ -77,7 +77,9 @@ survey_metadata <- get_survey_info()
 survey_metadata
 ```
 
-![](survey_metadata.png)
+```{r echo=FALSE, out.width="75%"}
+knitr::include_graphics("images/survey_metadata.png")
+```
 
 To include the raw data along with survey metadata, set `append_raw_data = TRUE`. This returns a nested tibble in which raw data are saved as a list column.
 
@@ -86,11 +88,19 @@ survey_raw_data <- get_survey_info(append_raw_data = TRUE)
 survey_raw_data
 ```
 
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/survey_raw_data.png")
+```
+
 You can also retrieve raw survey data for a given session with `get_survey_responses_raw()`.
 
 ```{r eval=FALSE}
 session_3 <- get_survey_responses_raw(session = 3)
 session_3
+```
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/session_3.png")
 ```
 
 ## Redcap
@@ -102,9 +112,17 @@ redcap_raw <- get_redcap_raw(path_to_creds = "credentials.csv")
 redcap_raw
 ```
 
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/redcap_raw.png")
+```
+
 By default, identifiable information is excluded when retrieving raw Redcap data. To include identifiable variables, you must set `identifiable = TRUE`.
 
 ```{r eval=FALSE}
 redcap_identifiable <- get_redcap_raw(path_to_creds = "credentials.csv", identifiable = TRUE)
 redcap_identifiable
+```
+
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/redcap_identifiable.png")
 ```
