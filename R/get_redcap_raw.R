@@ -49,12 +49,13 @@ get_redcap_raw <- function(path_to_creds, identifiable = FALSE){
     filter(str_detect(.data$redcap_event_name, "session"))
 
   # identifiable variables
-  identifiable_vars <- c("first_name", "last_name", "email", "phone", "address", "friend")
+  identifiable_vars <- c("first_name", "last_name", "email", "phone",
+                         "address", "friend")
 
   if (identifiable) {
     return(redcap_data_raw)
-    } else {
-    return(redcap_data_raw %>%
-             select(-starts_with(all_of(identifiable_vars)))) # remove identifiable variables
-    }
   }
+
+  return(redcap_data_raw %>%
+             select(-starts_with(all_of(identifiable_vars)))) # remove identifiable variables
+}

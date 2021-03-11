@@ -6,8 +6,13 @@ Authors@R:
            family = "Cullen",
            role = c("aut", "cre"),
            email = "bcullen@uoregon.edu")
-Description: What the package does (one paragraph).
-URL: https://github.com/UOSAN/devaluation
+Description: This package contains a set of functions that facilitate API 
+    requests to Qualtrics and Redcap in order to fetch raw data from the 
+    Devaluation study, conducted by the Social and Affective Neuroscience Lab 
+    at the University of Oregon.
+URL: https://github.com/UOSAN/devaluation,
+     https://uosan.github.io/devaluation/
+BugReports: https://github.com/UOSAN/devaluation/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -26,5 +31,6 @@ Suggests:
     testthat,
     mockery,
     knitr,
-    rmarkdown
+    rmarkdown,
+    kableExtra
 VignetteBuilder: knitr
