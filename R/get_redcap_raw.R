@@ -54,8 +54,8 @@ get_redcap_raw <- function(path_to_creds, identifiable = FALSE){
 
   if (identifiable) {
     return(redcap_data_raw)
-    } else {
-    return(redcap_data_raw %>%
-             select(-starts_with(all_of(identifiable_vars)))) # remove identifiable variables
-    }
   }
+
+  return(redcap_data_raw %>%
+             select(-starts_with(all_of(identifiable_vars)))) # remove identifiable variables
+}
