@@ -76,7 +76,8 @@
 
       
 
-      </header><script src="get-started_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="get-started_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="get-started_files/kePrint-0.0.1/kePrint.js"></script><link href="get-started_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get Started</h1>
@@ -91,51 +92,83 @@
     
 <p>This package is designed to retrieve raw data from the Devaluation study from two sources – questionnaires administered via <a href="https://www.qualtrics.com/">Qualtrics</a> and a host of measures collected via <a href="https://www.project-redcap.org/">Redcap</a>, including outcome measures such as body mass, BMI, and hip-waist ratio.</p>
 <p>These data are collected from participants across 6 sessions:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">Session</th>
-<th align="left">Study timepoint</th>
+<style type="text/css">
+thead {
+  background-color: #2C3E50;
+  color: #fff;
+}
+</style>
+<table class="table table table-striped table-hover">
+<thead><tr>
+<th style="text-align:left;">
+Session
+</th>
+<th style="text-align:left;">
+Study timepoint
+</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="left">Session 0</td>
-<td align="left">Initial visit</td>
+<tr>
+<td style="text-align:left;">
+Session 0
+</td>
+<td style="text-align:left;">
+Initial visit
+</td>
 </tr>
-<tr class="even">
-<td align="left">Session 1</td>
-<td align="left">Pre-intervention</td>
+<tr>
+<td style="text-align:left;">
+Session 1
+</td>
+<td style="text-align:left;">
+Pre-intervention
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Session 2</td>
-<td align="left">Post-intervention</td>
+<tr>
+<td style="text-align:left;">
+Session 2
+</td>
+<td style="text-align:left;">
+Post-intervention
+</td>
 </tr>
-<tr class="even">
-<td align="left">Session 3</td>
-<td align="left">3-month follow-up</td>
+<tr>
+<td style="text-align:left;">
+Session 3
+</td>
+<td style="text-align:left;">
+3-month follow-up
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Session 4</td>
-<td align="left">6-month follow-up</td>
+<tr>
+<td style="text-align:left;">
+Session 4
+</td>
+<td style="text-align:left;">
+6-month follow-up
+</td>
 </tr>
-<tr class="even">
-<td align="left">Session 5</td>
-<td align="left">12-month follow-up</td>
+<tr>
+<td style="text-align:left;">
+Session 5
+</td>
+<td style="text-align:left;">
+12-month follow-up
+</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Note.</strong> Data are currently not publicly available, as data collection is ongoing, so the examples included here demonstrate code usage only and do not include output.</p>
+<p><strong>Note.</strong> The examples included here demonstrate code usage with screenshots of redacted output to protect data privacy.</p>
 <div id="api-credentials-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#api-credentials-file" class="anchor"></a>API credentials file</h2>
 <p>To access data, you will need a credentials file, saved in .csv format, that contains valid API tokens for Qualtrics and Redcap, along with the proper UO-specific base URL for each platform. (The example shown here does not contain valid tokens.)</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"credentials.csv"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 2 x 3</span>
-<span class="co">#&gt;   data_source base_url                        api_token</span>
-<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                           &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 qualtrics   oregon.ca1.qualtrics.com        Pbqm…    </span>
-<span class="co">#&gt; 2 redcap      https://redcap.uoregon.edu/api/ 2A9C…</span></code></pre></div>
+<p>The credentials file should take the following form:</p>
+<pre><code>#&gt; # A tibble: 2 x 3
+#&gt;   data_source base_url                        api_token
+#&gt;   &lt;chr&gt;       &lt;chr&gt;                           &lt;chr&gt;    
+#&gt; 1 qualtrics   oregon.ca1.qualtrics.com        Pbqm…    
+#&gt; 2 redcap      https://redcap.uoregon.edu/api/ 2A9C…</code></pre>
 </div>
 <div id="qualtrics" class="section level2">
 <h2 class="hasAnchor">
@@ -146,23 +179,33 @@
 <span class="fu"><a href="../reference/register_qualtrics_credentials.html">register_qualtrics_credentials</a></span><span class="op">(</span>path_to_creds <span class="op">=</span> <span class="st">"credentials.csv"</span><span class="op">)</span></code></pre></div>
 <p>Once your credentials are registered, you can use <code><a href="../reference/get_survey_info.html">get_survey_info()</a></code> to obtain metadata about Qualtrics surveys, including the date each survey was last modified and the number of observations collected.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_survey_info.html">get_survey_info</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">survey_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_survey_info.html">get_survey_info</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">survey_metadata</span></code></pre></div>
+<p><img src="images/survey_metadata.png" width="75%"></p>
 <p>To include the raw data along with survey metadata, set <code>append_raw_data = TRUE</code>. This returns a nested tibble in which raw data are saved as a list column.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_survey_info.html">get_survey_info</a></span><span class="op">(</span>append_raw_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">survey_raw_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_survey_info.html">get_survey_info</a></span><span class="op">(</span>append_raw_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">survey_raw_data</span></code></pre></div>
+<p><img src="images/survey_raw_data.png" width="100%"></p>
 <p>You can also retrieve raw survey data for a given session with <code><a href="../reference/get_survey_responses_raw.html">get_survey_responses_raw()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_survey_responses_raw.html">get_survey_responses_raw</a></span><span class="op">(</span>session <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">session_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_survey_responses_raw.html">get_survey_responses_raw</a></span><span class="op">(</span>session <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="va">session_3</span></code></pre></div>
+<p><img src="images/session_3.png" width="100%"></p>
 </div>
 <div id="redcap" class="section level2">
 <h2 class="hasAnchor">
 <a href="#redcap" class="anchor"></a>Redcap</h2>
-<p>Get raw Redcap data with <code><a href="../reference/get_redcap_raw.html">get_redcap_raw()</a></code>. Rather than register your Redcap credentials in your session, simply feed this function the path to your credentials file with the <code>path_to_creds</code> argument.</p>
+<p>The package also facilitates the retrieval of data from Redcap with the <code><a href="../reference/get_redcap_raw.html">get_redcap_raw()</a></code> function. Rather than register your Redcap credentials in your session, simply feed this function the path to your credentials file with the <code>path_to_creds</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_redcap_raw.html">get_redcap_raw</a></span><span class="op">(</span>path_to_creds <span class="op">=</span> <span class="st">"credentials.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">redcap_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_redcap_raw.html">get_redcap_raw</a></span><span class="op">(</span>path_to_creds <span class="op">=</span> <span class="st">"credentials.csv"</span><span class="op">)</span>
+<span class="va">redcap_raw</span></code></pre></div>
+<p><img src="images/redcap_raw.png" width="100%"></p>
 <p>By default, identifiable information is excluded when retrieving raw Redcap data. To include identifiable variables, you must set <code>identifiable = TRUE</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_redcap_raw.html">get_redcap_raw</a></span><span class="op">(</span>path_to_creds <span class="op">=</span> <span class="st">"credentials.csv"</span>, identifiable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">redcap_identifiable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_redcap_raw.html">get_redcap_raw</a></span><span class="op">(</span>path_to_creds <span class="op">=</span> <span class="st">"credentials.csv"</span>, identifiable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">redcap_identifiable</span></code></pre></div>
+<p><img src="images/redcap_identifiable.png" width="100%"></p>
 </div>
   </div>
 
